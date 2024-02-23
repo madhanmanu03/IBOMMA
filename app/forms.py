@@ -1,11 +1,11 @@
 from django import forms
-from app.views import *
+from app.models import *
 
 
 class UserMF(forms.ModelForm):
     model=User
     fields=['username','email','password']
-    widgets={'password':forms.passwordInput}
+    widgets={'password':forms.PasswordInput}
     help_texts={'username':''}
 
 class ProfileMF(forms.ModelForm):

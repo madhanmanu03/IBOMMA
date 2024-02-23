@@ -36,3 +36,17 @@ def registration(request):
             return render(request,'Login.html')
 
     return render(request,'registration.html',d)
+
+def Login(request):
+    if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+        AUO=authenticate(username=username,password=password)
+        if AUO:
+            if AUO.is_active:
+                login(request,AUO)
+                request.session['username']=username
+                return HttpResponseRedirect(reverse('Home'))
+            else:
+                return HttpResponse('Not active User')
+    return render(request,'Login.html')
