@@ -23,4 +23,8 @@ from app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Login/',Login, name='Login'),
-]
+    path('Home/',Home.as_view(),name='Home'),
+    path('Enter_Page/',Enter_Page.as_view(),name='Enter_Page'),
+    path('Login/',Login, name='Login'),
+    path('Change_pas/',Change_pas,name='Change_pas'),
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

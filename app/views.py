@@ -9,6 +9,12 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.views.generic import TemplateView
 
+class Home(TemplateView):
+    template_name='Home.html'
+
+class Enter_Page(TemplateView):
+    template_name='Enter_Page.html'
+
 
 def registration(request):
     umf=UserMF()
@@ -50,3 +56,19 @@ def Login(request):
             else:
                 return HttpResponse('Not active User')
     return render(request,'Login.html')
+
+
+
+@login_required
+def Change_pas(request):
+    if request.method=="POST":
+        pw=request.POST['password']
+        username=request.session.get('username')
+        UO=User.objects.get(username=username)
+        UO.set_password(pw)
+        UO.save()
+        return render(request,'Enter_Page.html')
+    return render(request,'Change_pas.html')
+
+
+
